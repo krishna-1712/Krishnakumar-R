@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KrishnaKumar R — Aspiring Backend Developer</title>
+<meta name="description" content="Portfolio of KrishnaKumar R, aspiring Backend Developer skilled in Java, HTML, CSS and JavaScript. Open to work." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/devicon/2.15.1/devicon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { primary:'#38BDF8', accent:'#0EA5E9', secondary:'#E0F2FE', bg:'#F8FCFF', card:'#FFFFFF', ink:'#0F172A' },
+        fontFamily: { display:['Bricolage Grotesque','sans-serif'], body:['Manrope','sans-serif'], mono:['Space Mono','monospace'] },
+        borderRadius: { '4xl':'1.75rem', '5xl':'2.25rem' }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{ --primary:#38BDF8; --accent:#0EA5E9; --secondary:#E0F2FE; --bg:#F8FCFF; --card:#FFFFFF; --ink:#0F172A; }
+  *{ box-sizing:border-box; }
+  html.lenis{ height:auto; }
+  html.lenis, html.lenis body{ height:auto; }
+  html{ background:var(--bg); }
+  body{
+    background:var(--bg); color:var(--ink); font-family:'Manrope',sans-serif;
+    overflow-x:hidden; position:relative; cursor:none;
+  }
+  @media (max-width:900px){ body{ cursor:auto; } .cursor-el{ display:none !important; } }
+  h1,h2,h3,.font-display{ font-family:'Bricolage Grotesque',sans-serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+  ::selection{ background:#38BDF8; color:#fff; }
+  ::-webkit-scrollbar{ width:9px; }
+  ::-webkit-scrollbar-track{ background:var(--secondary); }
+  ::-webkit-scrollbar-thumb{ background:var(--primary); border-radius:10px; }
+
+  /* ================= Utilities ================= */
+  .glass{ background:rgba(255,255,255,0.6); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border:1px solid rgba(255,255,255,0.7); }
+  .glass-strong{ background:rgba(255,255,255,0.78); backdrop-filter:blur(22px) saturate(180%); -webkit-backdrop-filter:blur(22px) saturate(180%); border:1px solid rgba(255,255,255,0.8); }
+  .soft-shadow{ box-shadow:0 20px 44px -18px rgba(14,165,233,0.28), 0 4px 14px -6px rgba(15,23,42,0.08); }
+  .gradient-text{ background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .gradient-bg{ background:linear-gradient(135deg,var(--primary),var(--accent)); }
+
+  /* ================= Cursor ================= */
+  .cursor-el{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; }
+  #cursorDot{ width:8px; height:8px; margin:-4px 0 0 -4px; border-radius:50%; background:var(--accent); transition:transform .2s ease; }
+  #cursorDot.active{ transform:scale(2.4); }
+  #cursorGlow{ width:260px; height:260px; margin:-130px 0 0 -130px; border-radius:50%; background:radial-gradient(circle, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0) 70%); }
+
+  /* ================= Scroll progress ================= */
+  #scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; background:linear-gradient(90deg,#38BDF8,#0EA5E9); z-index:9998; box-shadow:0 0 14px rgba(56,189,248,0.75); }
+
+  /* ================= Nav ================= */
+  #navbar{ transition:background-color .4s ease, box-shadow .4s ease, backdrop-filter .4s ease, border-color .4s ease; background:transparent; border-bottom:1px solid transparent; }
+  #navbar.scrolled{ background:rgba(248,252,255,0.72); backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%); box-shadow:0 4px 26px -12px rgba(15,23,42,0.12); border-color:rgba(56,189,248,0.15); }
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:''; position:absolute; left:0; bottom:-5px; width:0%; height:2px; background:var(--accent); transition:width .3s ease; }
+  .nav-link:hover::after,.nav-link.active::after{ width:100%; }
+  .nav-link.active{ color:var(--accent); }
+
+  /* ================= Buttons + ripple ================= */
+  .btn{ position:relative; overflow:hidden; isolation:isolate; transition:transform .3s ease, box-shadow .3s ease, background .3s ease; }
+  .btn-gradient{ background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff; box-shadow:0 10px 26px -10px rgba(14,165,233,0.55); }
+  .btn-gradient:hover{ transform:translateY(-2px); box-shadow:0 16px 34px -10px rgba(14,165,233,0.65); }
+  .btn-ghost{ border:1.5px solid rgba(14,165,233,0.45); color:var(--accent); background:rgba(255,255,255,0.55); }
+  .btn-ghost:hover{ background:var(--secondary); transform:translateY(-2px); }
+  .ripple-el{ position:absolute; border-radius:50%; background:rgba(255,255,255,0.55); transform:scale(0); animation:rippleAnim .6s linear; pointer-events:none; }
+  @keyframes rippleAnim{ to{ transform:scale(3.2); opacity:0; } }
+
+  /* ================= Hero background ================= */
+  .hero-wrap{ position:relative; overflow:hidden; }
+  .blob{ position:absolute; border-radius:50%; filter:blur(70px); z-index:0; animation:blobFloat 13s ease-in-out infinite; }
+  .blob1{ width:420px; height:420px; background:radial-gradient(circle at 30% 30%,#38BDF8,transparent 70%); opacity:.5; top:-120px; left:-100px; }
+  .blob2{ width:360px; height:360px; background:radial-gradient(circle at 60% 40%,#0EA5E9,transparent 70%); opacity:.45; bottom:-140px; right:-90px; animation-delay:2.5s; }
+  .blob3{ width:260px; height:260px; background:radial-gradient(circle at 50% 50%,#E0F2FE,transparent 70%); opacity:.6; top:38%; left:48%; animation-delay:5s; }
+  @keyframes blobFloat{ 0%,100%{ transform:translate(0,0) scale(1);} 33%{ transform:translate(26px,-32px) scale(1.07);} 66%{ transform:translate(-22px,18px) scale(0.95);} }
+
+  .ring{ position:absolute; border-radius:50%; border:1px solid rgba(14,165,233,0.25); animation:ringSpin linear infinite; }
+  @keyframes ringSpin{ to{ transform:rotate(360deg); } }
+
+  #particleCanvas{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+
+  .typed-cursor{ color:var(--accent); font-weight:400; }
+
+  /* ================= Masked line reveal ================= */
+  .mask-line{ overflow:hidden; display:block; }
+  .mask-line .inner{ display:block; will-change:transform; }
+
+  /* ================= Marquee ================= */
+  .marquee-track{ display:flex; gap:2.75rem; width:max-content; animation:marquee 24s linear infinite; }
+  .marquee-track:hover{ animation-play-state:paused; }
+  @keyframes marquee{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  .marquee-item{ transition:transform .3s ease, filter .3s ease, color .3s ease; }
+  .marquee-item:hover{ transform:scale(1.14); filter:drop-shadow(0 0 12px rgba(56,189,248,0.65)); color:var(--accent); }
+
+  /* ================= Cards ================= */
+  .lift{ transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease; }
+  .lift:hover{ transform:translateY(-8px); box-shadow:0 22px 44px -16px rgba(15,23,42,0.18); border-color:rgba(56,189,248,0.5); }
+
+  .icon-pop{ transition:transform .4s cubic-bezier(.2,.8,.2,1); }
+  .lift:hover .icon-pop{ transform:rotate(-8deg) scale(1.15); }
+
+  .chapter-num{ -webkit-text-stroke:1.5px rgba(14,165,233,0.35); color:transparent; font-family:'Space Mono',monospace; }
+
+  /* ================= Timeline ================= */
+  .tl-line{ background:linear-gradient(180deg,var(--primary),rgba(56,189,248,0.05)); }
+  .tl-dot{ box-shadow:0 0 0 6px rgba(56,189,248,0.18), 0 0 20px rgba(56,189,248,0.6); animation:dotPulse 2.4s ease-in-out infinite; }
+  @keyframes dotPulse{ 0%,100%{ box-shadow:0 0 0 6px rgba(56,189,248,0.18), 0 0 20px rgba(56,189,248,0.6);} 50%{ box-shadow:0 0 0 10px rgba(56,189,248,0.1), 0 0 28px rgba(56,189,248,0.8);} }
+
+  .badge-pulse{ position:relative; }
+  .badge-pulse::before{ content:''; position:absolute; inset:0; border-radius:50%; background:#22c55e; animation:pulseRing 1.8s ease-out infinite; }
+  @keyframes pulseRing{ 0%{ transform:scale(1); opacity:.65;} 100%{ transform:scale(2.6); opacity:0;} }
+
+  .tech-badge{ background:var(--secondary); color:var(--accent); border:1px solid rgba(56,189,248,0.28); }
+
+  #back-to-top{ position:fixed; bottom:26px; right:26px; z-index:50; opacity:0; pointer-events:none; transform:translateY(10px) scale(.9); transition:all .35s ease; }
+  #back-to-top.show{ opacity:1; pointer-events:auto; transform:translateY(0) scale(1); }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body class="font-body">
+
+<div id="cursorGlow" class="cursor-el"></div>
+<div id="cursorDot" class="cursor-el"></div>
+<div id="scroll-progress"></div>
+
+<!-- ===================== NAVBAR ===================== -->
+<header id="navbar" class="fixed top-0 left-0 w-full z-40">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4" aria-label="Primary">
+    <a href="#home" class="flex items-center gap-2.5" data-testid="logo-home">
+      <span class="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center text-white font-display font-bold text-sm">KR</span>
+      <span class="font-display font-bold text-lg text-ink">Krishna<span class="text-accent">Kumar</span></span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/75">
+      <li><a href="#home" class="nav-link active hover:text-accent transition-colors" data-nav>Home</a></li>
+      <li><a href="#about" class="nav-link hover:text-accent transition-colors" data-nav>About</a></li>
+      <li><a href="#skills" class="nav-link hover:text-accent transition-colors" data-nav>Skills</a></li>
+      <li><a href="#projects" class="nav-link hover:text-accent transition-colors" data-nav>Projects</a></li>
+      <li><a href="#certificates" class="nav-link hover:text-accent transition-colors" data-nav>Certificates</a></li>
+      <li><a href="#contact" class="nav-link hover:text-accent transition-colors" data-nav>Contact</a></li>
+    </ul>
+
+    <a href="#contact" class="btn btn-gradient btn-ripple hidden md:inline-flex text-sm font-semibold px-5 py-2.5 rounded-full" data-testid="nav-hire-me">Hire Me</a>
+
+    <button id="menuBtn" class="md:hidden text-ink text-xl" aria-label="Toggle menu" aria-expanded="false" data-testid="mobile-menu-toggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <div id="mobileMenu" class="md:hidden hidden glass-strong mx-4 rounded-2xl soft-shadow px-6 py-5 flex flex-col gap-4 text-ink/80 font-medium">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#certificates" class="mobile-link">Certificates</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="home" class="hero-wrap min-h-screen flex items-center pt-28 pb-20 relative">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="ring w-[420px] h-[420px] top-[8%] right-[4%] hidden lg:block" style="animation-duration:60s;"></div>
+  <div class="ring w-[260px] h-[260px] bottom-[6%] left-[6%] hidden lg:block" style="animation-duration:45s; animation-direction:reverse;"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center relative z-10 w-full">
+    <div>
+      <div id="heroBadge" class="inline-flex items-center gap-2.5 glass rounded-full pl-3 pr-4 py-2 mb-7 soft-shadow" data-testid="open-to-work-badge">
+        <span class="badge-pulse w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+        <span class="text-xs font-mono tracking-wide text-ink/70">Open To Work</span>
+      </div>
+
+      <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.04] text-ink">
+        <span class="mask-line"><span class="inner" id="heroLine1">KrishnaKumar <span class="text-accent">R</span></span></span>
+        <span class="mask-line"><span class="inner text-4xl sm:text-5xl lg:text-6xl text-ink/70 font-semibold" id="heroLine2">I build reliable</span></span>
+        <span class="mask-line"><span class="inner text-4xl sm:text-5xl lg:text-6xl text-ink/70 font-semibold" id="heroLine3">backend software.</span></span>
+      </h1>
+
+      <div id="heroTyped" class="mt-6 h-8 text-lg sm:text-xl font-medium text-ink/70 font-mono flex items-center gap-2">
+        <span class="text-accent">&gt;</span><span id="typed"></span>
+      </div>
+
+      <p id="heroSub" class="mt-6 max-w-lg text-ink/55 leading-relaxed">
+        Currently open to internship and entry-level backend roles while sharpening my craft in Java, one project at a time.
+      </p>
+
+      <div id="heroButtons" class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="#contact" class="btn btn-gradient btn-ripple font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2" data-testid="hero-hire-me">Hire Me <i class="fa-solid fa-arrow-right text-sm"></i></a>
+        <a href="https://linkedin.com/in/krishnakumar-rajkannan" target="_blank" rel="noopener" class="btn btn-ghost btn-ripple font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2" data-testid="hero-linkedin">
+          <i class="fa-brands fa-linkedin text-lg"></i> LinkedIn
+        </a>
+      </div>
+
+      <div id="heroStats" class="mt-12 flex flex-wrap items-center gap-8 font-mono text-xs text-ink/50">
+        <div><p class="text-ink font-semibold text-sm">Java</p><p class="mt-0.5">Primary Stack</p></div>
+        <div class="w-px h-8 bg-ink/10"></div>
+        <div><p class="text-ink font-semibold text-sm">RGCET</p><p class="mt-0.5">College</p></div>
+        <div class="w-px h-8 bg-ink/10"></div>
+        <div><p class="text-ink font-semibold text-sm">3+</p><p class="mt-0.5">Skills</p></div>
+      </div>
+    </div>
+
+    <div id="heroCard" class="relative flex justify-center">
+      <div id="tiltCard" class="glass-strong soft-shadow relative rounded-5xl p-8 w-72 sm:w-80" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.22">
+        <span class="absolute -top-3 left-8 gradient-bg text-white text-[11px] font-mono font-semibold px-3 py-1 rounded-full -rotate-3 shadow-lg">Backend Dev</span>
+        <div class="mx-auto w-28 h-28 rounded-full gradient-bg flex items-center justify-center text-white text-4xl font-display font-bold shadow-lg mt-2">KR</div>
+        <h3 class="text-center font-display font-bold text-lg mt-5 text-ink">KrishnaKumar R</h3>
+        <p class="text-center text-accent text-sm font-medium mt-1">Aspiring Backend Developer</p>
+
+        <div class="mt-6 space-y-2.5">
+          <div class="glass rounded-xl px-4 py-2.5 flex items-center gap-3 text-xs text-ink/70"><i class="fa-solid fa-graduation-cap text-accent w-4"></i> Rajiv Gandhi College Of Engineering &amp; Technology</div>
+          <div class="glass rounded-xl px-4 py-2.5 flex items-center gap-3 text-xs text-ink/70 break-all"><i class="fa-solid fa-envelope text-accent w-4"></i> krishnakumar20051712@gmail.com</div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-3">
+          <a href="https://linkedin.com/in/krishnakumar-rajkannan" target="_blank" rel="noopener" aria-label="LinkedIn profile" class="w-11 h-11 rounded-full gradient-bg text-white flex items-center justify-center hover:scale-110 transition-transform"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:krishnakumar20051712@gmail.com" aria-label="Send email" class="w-11 h-11 rounded-full glass border border-accent/30 text-accent flex items-center justify-center hover:scale-110 transition-transform"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-ink/40 flex flex-col items-center gap-2 text-xs font-mono tracking-widest z-10" aria-label="Scroll down">
+    scroll
+    <i class="fa-solid fa-chevron-down animate-bounce text-accent"></i>
+  </a>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<section class="py-9 border-y border-ink/8 bg-white/45 overflow-hidden">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">01 — About</p>
+    <h2 class="font-display font-bold text-4xl sm:text-5xl text-ink mb-14 max-w-xl" data-aos="fade-up" data-aos-delay="60">The person behind the code.</h2>
+
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-8">
+      <div class="glass-strong soft-shadow rounded-5xl p-8 sm:p-10" data-aos="fade-right" data-aos-delay="80">
+        <h3 class="font-display font-bold text-xl text-ink">KrishnaKumar R</h3>
+        <p class="text-accent text-sm font-semibold mt-1">Aspiring Backend Developer · Open To Work</p>
+        <p class="text-ink/65 leading-relaxed mt-5">
+          I am an aspiring Backend Developer passionate about building reliable software solutions using Java. I enjoy learning modern technologies and continuously improving my programming and problem-solving skills.
+        </p>
+        <div class="mt-7 space-y-3">
+          <div class="flex items-center gap-3 glass rounded-xl px-4 py-3 text-sm text-ink/70">
+            <span class="w-9 h-9 rounded-lg gradient-bg text-white flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-graduation-cap"></i></span>
+            Rajiv Gandhi College Of Engineering and Technology
+          </div>
+          <div class="flex items-center gap-3 glass rounded-xl px-4 py-3 text-sm text-ink/70">
+            <span class="w-9 h-9 rounded-lg gradient-bg text-white flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-school"></i></span>
+            St. Joseph Higher Secondary School, Cuddalore
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-5">
+        <div class="lift glass rounded-3xl p-6 flex gap-5" data-aos="fade-left" data-aos-delay="100">
+          <span class="chapter-num text-4xl font-bold leading-none">01</span>
+          <div><h4 class="font-display font-semibold text-ink text-lg">Reliable by design</h4><p class="text-sm text-ink/55 mt-1.5">I favour clear structure and predictable behaviour over clever shortcuts.</p></div>
+        </div>
+        <div class="lift glass rounded-3xl p-6 flex gap-5" data-aos="fade-left" data-aos-delay="180">
+          <span class="chapter-num text-4xl font-bold leading-none">02</span>
+          <div><h4 class="font-display font-semibold text-ink text-lg">Always learning</h4><p class="text-sm text-ink/55 mt-1.5">New tools and concepts get added to my stack as I go, deliberately and steadily.</p></div>
+        </div>
+        <div class="lift glass rounded-3xl p-6 flex gap-5" data-aos="fade-left" data-aos-delay="260">
+          <span class="chapter-num text-4xl font-bold leading-none">03</span>
+          <div><h4 class="font-display font-semibold text-ink text-lg">Problem solver first</h4><p class="text-sm text-ink/55 mt-1.5">I care more about understanding the problem than rushing to write code.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills" class="py-28 px-6 bg-secondary/40">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">02 — Skills</p>
+    <h2 class="font-display font-bold text-4xl sm:text-5xl text-ink mb-14" data-aos="fade-up" data-aos-delay="60">Tools I work with</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="0">
+        <i class="devicon-java-plain colored icon-pop text-4xl mb-4 inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">Core Java</h3>
+        <p class="text-sm text-ink/55">OOP fundamentals, collections, and problem-solving.</p>
+      </div>
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="80">
+        <i class="devicon-html5-plain colored icon-pop text-4xl mb-4 inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">HTML</h3>
+        <p class="text-sm text-ink/55">Semantic, accessible markup for the web.</p>
+      </div>
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="160">
+        <i class="devicon-css3-plain colored icon-pop text-4xl mb-4 inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">CSS</h3>
+        <p class="text-sm text-ink/55">Responsive layouts, animation and design systems.</p>
+      </div>
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="240">
+        <i class="devicon-javascript-plain colored icon-pop text-4xl mb-4 inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">JavaScript</h3>
+        <p class="text-sm text-ink/55">Interactive, dynamic front-end behaviour.</p>
+      </div>
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="320">
+        <i class="fa-solid fa-clapperboard icon-pop text-4xl mb-4 text-accent inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">Video Editing</h3>
+        <p class="text-sm text-ink/55">Cutting and polishing engaging video content.</p>
+      </div>
+      <div class="lift glass-strong rounded-3xl p-7" data-aos="zoom-in" data-aos-delay="400">
+        <i class="fa-solid fa-wand-magic-sparkles icon-pop text-4xl mb-4 text-accent inline-block"></i>
+        <h3 class="font-display font-semibold text-ink mb-1">Photo Designing</h3>
+        <p class="text-sm text-ink/55">Clean visual design and photo composition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COURSES + CERTIFICATES ===================== -->
+<section id="certificates" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10">
+
+    <div>
+      <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">03 — Courses</p>
+      <h2 class="font-display font-bold text-3xl text-ink mb-10" data-aos="fade-up" data-aos-delay="60">Learning path</h2>
+
+      <div class="relative pl-10" data-aos="fade-up" data-aos-delay="100">
+        <div class="tl-line absolute left-[7px] top-1 bottom-1 w-[2px]"></div>
+        <div class="relative">
+          <span class="tl-dot absolute -left-10 top-1.5 w-3.5 h-3.5 rounded-full bg-primary"></span>
+          <div class="lift glass-strong rounded-3xl p-6">
+            <h3 class="font-display font-semibold text-ink text-lg">Computer Networks Basics</h3>
+            <p class="text-sm text-ink/55 mt-1.5">Fundamentals of networking — protocols, topologies and data communication.</p>
+            <span class="tech-badge inline-flex items-center gap-1.5 mt-4 px-3 py-1 rounded-full text-xs font-semibold"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">04 — Certification</p>
+      <h2 class="font-display font-bold text-3xl text-ink mb-10" data-aos="fade-up" data-aos-delay="60">Achievements</h2>
+
+      <div class="lift relative glass-strong soft-shadow rounded-5xl p-8 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
+        <div class="relative flex items-start justify-between gap-4">
+          <div class="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center text-white text-2xl shadow-lg shrink-0"><i class="fa-solid fa-award"></i></div>
+          <span class="glass px-3 py-1.5 rounded-full text-xs font-mono font-semibold text-emerald-600 flex items-center gap-1.5"><i class="fa-solid fa-circle-check"></i> Completed</span>
+        </div>
+        <h3 class="relative font-display font-bold text-2xl text-ink mt-6">Cloud Computing</h3>
+        <p class="relative text-accent text-sm font-semibold mt-1">Issued by NPTEL</p>
+        <p class="relative text-ink/55 text-sm mt-4 leading-relaxed">National Programme on Technology Enhanced Learning — a foundational course covering cloud service models, deployment and core infrastructure concepts.</p>
+        <p class="relative font-mono text-xs text-ink/40 mt-5 flex items-center gap-2"><i class="fa-solid fa-shield-halved text-accent"></i> Verified Certification</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" class="py-28 px-6 bg-secondary/40">
+  <div class="max-w-6xl mx-auto">
+    <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">05 — Projects</p>
+    <h2 class="font-display font-bold text-4xl sm:text-5xl text-ink mb-14" data-aos="fade-up" data-aos-delay="60">Things I've built</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="lift glass-strong soft-shadow rounded-5xl overflow-hidden" data-aos="fade-up" data-aos-delay="80">
+        <div class="relative gradient-bg h-40 flex items-center justify-center">
+          <i class="fa-solid fa-clipboard-list icon-pop text-white text-6xl transition-transform duration-500"></i>
+          <span class="absolute top-4 right-4 glass px-3 py-1 rounded-full text-[11px] font-mono font-semibold text-white/90 border-white/40">Web App</span>
+        </div>
+        <div class="p-8">
+          <h3 class="font-display font-bold text-xl text-ink">Exam Registration System</h3>
+          <p class="text-sm text-ink/55 mt-2 leading-relaxed">A web app to register and manage student exams, built with a focus on clarity and ease of use.</p>
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="tech-badge px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5"><i class="devicon-html5-plain colored"></i> HTML</span>
+            <span class="tech-badge px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5"><i class="devicon-css3-plain colored"></i> CSS</span>
+            <span class="tech-badge px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+          </div>
+          <a href="#contact" class="btn btn-gradient btn-ripple mt-7 inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full">View Details <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        </div>
+      </div>
+
+      <div class="lift rounded-5xl border-2 border-dashed border-accent/30 flex flex-col items-center justify-center text-center p-10" data-aos="fade-up" data-aos-delay="160">
+        <div class="w-16 h-16 rounded-2xl glass flex items-center justify-center text-2xl text-accent mb-5"><i class="fa-solid fa-code"></i></div>
+        <h3 class="font-display font-bold text-xl text-ink">More on the way</h3>
+        <p class="text-sm text-ink/55 mt-2 max-w-xs">I'm actively building new backend-focused projects — check back soon.</p>
+        <a href="#contact" class="btn btn-ghost btn-ripple mt-7 inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full">Let's collaborate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="font-mono text-xs tracking-[0.2em] text-accent uppercase mb-3" data-aos="fade-up">06 — Contact</p>
+    <h2 class="font-display font-bold text-4xl sm:text-5xl text-ink mb-4" data-aos="fade-up" data-aos-delay="60">Let's build something reliable together.</h2>
+    <p class="text-ink/55 max-w-md mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">I'm <span class="text-accent font-semibold">open to work</span> — internship and entry-level backend roles. Reach out any time.</p>
+
+    <div class="glass-strong soft-shadow rounded-5xl p-8 sm:p-10" data-aos="fade-up" data-aos-delay="140">
+      <div class="glass rounded-2xl px-5 py-4 flex items-center justify-between gap-4 flex-wrap">
+        <span class="font-mono text-sm text-ink/75 break-all" id="emailText">krishnakumar20051712@gmail.com</span>
+        <button id="copyEmailBtn" class="btn btn-ghost btn-ripple text-xs font-semibold px-4 py-2 rounded-full inline-flex items-center gap-2" aria-label="Copy email address" data-testid="copy-email-btn">
+          <i class="fa-regular fa-copy" id="copyIcon"></i> <span id="copyLabel">Copy</span>
+        </button>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+        <a href="mailto:krishnakumar20051712@gmail.com" class="btn btn-gradient btn-ripple font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2" data-testid="send-email-btn"><i class="fa-solid fa-paper-plane text-sm"></i> Send Email</a>
+        <a href="https://linkedin.com/in/krishnakumar-rajkannan" target="_blank" rel="noopener" class="btn btn-ghost btn-ripple font-semibold px-7 py-3.5 rounded-full inline-flex items-center gap-2" data-testid="connect-linkedin-btn"><i class="fa-brands fa-linkedin text-lg"></i> Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="py-10 px-6 border-t border-ink/10 text-center">
+  <p class="text-sm text-ink/45">Made with <i class="fa-solid fa-heart text-primary"></i> using HTML, CSS &amp; JavaScript</p>
+  <p class="font-mono text-xs text-ink/30 mt-2">© 2025 KrishnaKumar R · Aspiring Backend Developer</p>
+</footer>
+
+<button id="back-to-top" class="btn btn-gradient btn-ripple w-12 h-12 rounded-full flex items-center justify-center shadow-lg" aria-label="Back to top" data-testid="back-to-top-btn"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ---------- Lenis smooth scroll ---------- */
+    let lenis;
+    if (window.Lenis) {
+      lenis = new Lenis({ duration: 1.1, easing: t => 1 - Math.pow(1 - t, 3), smoothWheel: true });
+      window.lenis = lenis;
+      function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      if (window.gsap && window.ScrollTrigger) {
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
+    }
+
+    /* ---------- AOS ---------- */
+    if (window.AOS) AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+
+    /* ---------- Typed.js ---------- */
+    if (window.Typed) {
+      new Typed('#typed', {
+        strings: ['Aspiring Backend Developer', 'Java Learner', 'Open To Work'],
+        typeSpeed: 50, backSpeed: 28, backDelay: 1400, loop: true, smartBackspace: true
+      });
+    }
+
+    /* ---------- VanillaTilt ---------- */
+    if (window.VanillaTilt) VanillaTilt.init(document.querySelectorAll('#tiltCard'), { max: 8, speed: 400, glare: true, 'max-glare': 0.22 });
+
+    /* ---------- Custom cursor ---------- */
+    const dot = document.getElementById('cursorDot');
+    const glow = document.getElementById('cursorGlow');
+    let mx = 0, my = 0, gx = 0, gy = 0;
+    const isTouch = window.matchMedia('(max-width: 900px)').matches;
+    if (!isTouch) {
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px)`;
+      });
+      (function loop(){
+        gx += (mx - gx) * 0.12; gy += (my - gy) * 0.12;
+        glow.style.transform = `translate(${gx}px, ${gy}px)`;
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll('a, button, [data-tilt]').forEach(el => {
+        el.addEventListener('mouseenter', () => dot.classList.add('active'));
+        el.addEventListener('mouseleave', () => dot.classList.remove('active'));
+      });
+    }
+
+    /* ---------- Scroll progress / navbar / back-to-top ---------- */
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+    const progress = document.getElementById('scroll-progress');
+    function onScroll(){
+      const st = window.scrollY;
+      navbar.classList.toggle('scrolled', st > 40);
+      backToTop.classList.toggle('show', st > 500);
+      const h = document.documentElement;
+      progress.style.width = (st / (h.scrollHeight - h.clientHeight)) * 100 + '%';
+    }
+    (lenis ? lenis.on('scroll', onScroll) : document.addEventListener('scroll', onScroll, { passive: true }));
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    backToTop.addEventListener('click', () => {
+      if (lenis) lenis.scrollTo(0); else window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ---------- Mobile menu ---------- */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!isHidden));
+      menuBtn.innerHTML = isHidden ? '<i class="fa-solid fa-bars"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    /* ---------- Smooth anchor scroll via Lenis, offset -70 ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        const targetId = this.getAttribute('href');
+        if (targetId.length <= 1) return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) { lenis.scrollTo(target, { offset: -70 }); }
+        else { const top = target.getBoundingClientRect().top + window.scrollY - 70; window.scrollTo({ top, behavior: 'smooth' }); }
+      });
+    });
+
+    /* ---------- Active-section nav tracking ---------- */
+    const navLinks = document.querySelectorAll('[data-nav]');
+    const sections = ['home','about','skills','projects','certificates','contact'].map(id => document.getElementById(id)).filter(Boolean);
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`[data-nav][href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => sectionObserver.observe(s));
+
+    /* ---------- Marquee ---------- */
+    const marqueeItems = [
+      { icon: 'devicon-java-plain colored', label: 'Java' },
+      { icon: 'devicon-html5-plain colored', label: 'HTML5' },
+      { icon: 'devicon-css3-plain colored', label: 'CSS3' },
+      { icon: 'devicon-javascript-plain colored', label: 'JavaScript' },
+    ];
+    const track = document.getElementById('marqueeTrack');
+    function buildSet(){
+      const frag = document.createDocumentFragment();
+      marqueeItems.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'marquee-item flex items-center gap-3 shrink-0 text-ink/70 font-display font-semibold text-lg';
+        el.innerHTML = `<i class="${item.icon} text-3xl"></i> ${item.label} <span class="text-accent/50 ml-2">&#10022;</span>`;
+        frag.appendChild(el);
+      });
+      return frag;
+    }
+    track.appendChild(buildSet());
+    track.appendChild(buildSet());
+
+    /* ---------- Ripple ---------- */
+    document.querySelectorAll('.btn-ripple').forEach(btn => {
+      btn.addEventListener('click', function(e){
+        const rect = this.getBoundingClientRect();
+        const rip = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        rip.className = 'ripple-el';
+        rip.style.width = rip.style.height = size + 'px';
+        rip.style.left = (e.clientX - rect.left - size/2) + 'px';
+        rip.style.top = (e.clientY - rect.top - size/2) + 'px';
+        this.appendChild(rip);
+        setTimeout(() => rip.remove(), 650);
+      });
+    });
+
+    /* ---------- Copy email ---------- */
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const copyIcon = document.getElementById('copyIcon');
+    const copyLabel = document.getElementById('copyLabel');
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText('krishnakumar20051712@gmail.com'); }
+      catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = 'krishnakumar20051712@gmail.com';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      copyIcon.className = 'fa-solid fa-check';
+      copyLabel.textContent = 'Copied';
+      setTimeout(() => { copyIcon.className = 'fa-regular fa-copy'; copyLabel.textContent = 'Copy'; }, 1800);
+    });
+
+    /* ---------- Particle network canvas ---------- */
+    (function particles(){
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      const heroSection = document.getElementById('home');
+      let w, h, dots = [];
+      function resize(){
+        w = canvas.width = heroSection.clientWidth;
+        h = canvas.height = heroSection.clientHeight;
+      }
+      function initDots(){
+        const count = Math.min(70, Math.floor((w * h) / 16000));
+        dots = Array.from({ length: count }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3
+        }));
+      }
+      function tick(){
+        ctx.clearRect(0, 0, w, h);
+        dots.forEach(d => {
+          d.x += d.vx; d.y += d.vy;
+          if (d.x < 0 || d.x > w) d.vx *= -1;
+          if (d.y < 0 || d.y > h) d.vy *= -1;
+        });
+        for (let i = 0; i < dots.length; i++) {
+          for (let j = i + 1; j < dots.length; j++) {
+            const dx = dots[i].x - dots[j].x, dy = dots[i].y - dots[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 130) {
+              ctx.strokeStyle = `rgba(14,165,233,${0.14 * (1 - dist / 130)})`;
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y); ctx.stroke();
+            }
+          }
+        }
+        dots.forEach(d => {
+          ctx.fillStyle = 'rgba(56,189,248,0.5)';
+          ctx.beginPath(); ctx.arc(d.x, d.y, 1.6, 0, Math.PI * 2); ctx.fill();
+        });
+        requestAnimationFrame(tick);
+      }
+      resize(); initDots(); tick();
+      window.addEventListener('resize', () => { resize(); initDots(); });
+    })();
+
+    /* ---------- GSAP hero entrance: masked line reveal + fade/rise ---------- */
+    if (window.gsap) {
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      tl.set('.mask-line .inner', { yPercent: 110 })
+        .set(['#heroBadge', '#heroTyped', '#heroSub', '#heroButtons', '#heroStats', '#heroCard'], { opacity: 0, y: 24 })
+        .to('.mask-line .inner', { yPercent: 0, duration: 0.8, stagger: 0.1 })
+        .to('#heroBadge', { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
+        .to('#heroTyped', { opacity: 1, y: 0, duration: 0.6 }, '-=0.45')
+        .to('#heroSub', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+        .to('#heroButtons', { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
+        .to('#heroStats', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+        .to('#heroCard', { opacity: 1, y: 0, duration: 0.7 }, '-=0.6');
+
+      // safety timeout: force-clear props to guarantee final visible state
+      setTimeout(() => {
+        gsap.set('.mask-line .inner', { clearProps: 'transform' });
+        gsap.set(['#heroBadge', '#heroTyped', '#heroSub', '#heroButtons', '#heroStats', '#heroCard'], { clearProps: 'all', opacity: 1 });
+      }, 2200);
+    } else {
+      document.querySelectorAll('.mask-line .inner').forEach(el => el.style.transform = 'none');
+    }
+  });
+</script>
+</body>
+</html>
